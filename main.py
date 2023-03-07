@@ -18,16 +18,16 @@ def main():
         view.show_turn(turn=game.turn)
         x, y = player.player_address()
         status = Status(t=game.turn, p=(x, y), s=board.squares)
-        if model.check_direction(status):
+        if model.check_direction(status) and model.check_flip(status):
             print(f"{(x, y)}におくことができます")
             model.check_flip(status=status)
             # new_squares = model.flip_tile(status)
             # board.update(new_squares=new_squares)
         else:
             print("おけません")
-            break
+            continue
 
-        # board.squares[x][y] = game.turn
-        # game.change_turn()
+        board.squares[x][y] = game.turn
+        game.change_turn()
 
 main()
